@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.katyrin.testmovieapp.view.customview.SquareCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/margin_max"
+    android:layout_marginTop="@dimen/margin_min"
+    android:layout_marginEnd="@dimen/margin_max"
+    android:layout_marginBottom="@dimen/margin_min"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/margin_min">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/poster"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/name_text_view"
+            style="@style/BaseTextStyle.Header.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@string/very_long_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.katyrin.testmovieapp.view.customview.SquareCardView>

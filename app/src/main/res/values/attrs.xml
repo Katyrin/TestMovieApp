@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="headerTextColor" format="color" />
+    <attr name="normalTextColor" format="color" />
+    <attr name="headerBackgroundColor" format="color" />
+    <attr name="genreBackgroundColor" format="color" />
+
+</resources>

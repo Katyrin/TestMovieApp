@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="headerTextColor">@color/header_text_color_dark</item>
+        <item name="headerBackgroundColor">@color/header_text_color_light</item>
+        <item name="normalTextColor">@color/normal_text_color_dark</item>
+        <item name="genreBackgroundColor">@color/genre_background_color_light</item>
     </style>
 </resources>

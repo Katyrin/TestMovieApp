@@ -5,8 +5,8 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.katyrin.testmovieapp.R
 import com.katyrin.testmovieapp.databinding.ActivityMainBinding
-import com.katyrin.testmovieapp.presenter.MainPresenter
-import com.katyrin.testmovieapp.presenter.MainView
+import com.katyrin.testmovieapp.presenter.main.MainPresenter
+import com.katyrin.testmovieapp.presenter.main.MainView
 import com.katyrin.testmovieapp.view.abs.AbsActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter

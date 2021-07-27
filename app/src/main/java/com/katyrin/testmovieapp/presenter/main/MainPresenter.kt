@@ -1,4 +1,4 @@
-package com.katyrin.testmovieapp.presenter
+package com.katyrin.testmovieapp.presenter.main
 
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.FragmentScreen
