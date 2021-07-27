@@ -6,6 +6,7 @@ import com.github.terrakok.cicerone.Router
 import com.katyrin.testmovieapp.App
 import com.katyrin.testmovieapp.di.modules.HomeModule
 import com.katyrin.testmovieapp.di.modules.MainModule
+import com.katyrin.testmovieapp.di.modules.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -17,7 +18,8 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         MainModule::class,
-        HomeModule::class
+        HomeModule::class,
+        NetworkModule::class
     ]
 )
 interface AppComponent : AndroidInjector<App> {

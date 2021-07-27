@@ -6,5 +6,6 @@
     <dimen name="margin_max">16dp</dimen>
 
     <dimen name="text_size_header">24sp</dimen>
+    <dimen name="text_size_header_normal">16sp</dimen>
 
 </resources>

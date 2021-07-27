@@ -52,7 +52,7 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
         GridLayoutManager(context, SPAN_TWO).apply {
             spanSizeLookup = object : SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int =
-                    if (data[position] is RecyclerData.Film) SPAN_TWO else SPAN_ONE
+                    if (data[position] is RecyclerData.Film) SPAN_ONE else SPAN_TWO
             }
         }
 

@@ -9,11 +9,14 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Light theme. -->
-    <color name="header_text_color_light">#CC000000</color>
+    <color name="header_text_color_light">#AA000000</color>
     <color name="normal_text_color_light">#99000000</color>
-    <color name="genre_background_color_light">#66000000</color>
+    <color name="genre_background_color_light">#44000000</color>
+    <color name="genre_background_color_gray">#DCDCDC</color>
     <!-- Dark theme. -->
-    <color name="header_text_color_dark">#CCFFFFFF</color>
+    <color name="header_text_color_dark">#AAFFFFFF</color>
     <color name="normal_text_color_dark">#99FFFFFF</color>
     <color name="genre_background_color_dark">#66FFFFFF</color>
+    <color name="background_header_dark">#BBFFFFFF</color>
+    <color name="genre_background_color_dark_gray">#242424</color>
 </resources>
