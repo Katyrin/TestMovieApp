@@ -1,6 +1,10 @@
 package com.katyrin.testmovieapp.utils
 
+import android.content.Context
+import android.util.TypedValue
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -20,4 +24,14 @@ fun AppCompatImageView.setImageByUri(uri: String?, placeholder: Int = R.drawable
         .placeholder(placeholder)
         .error(R.drawable.ic_no_photo_vector)
         .into(this)
+}
+
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }

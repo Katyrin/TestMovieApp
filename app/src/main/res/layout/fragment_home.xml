@@ -26,11 +26,10 @@
 
     <TextView
         android:id="@+id/empty_text"
+        style="@style/BaseTextStyle.Header.Max"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:text="@string/the_list_is_empty"
-        android:textSize="@dimen/text_size_header"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -6,12 +6,15 @@ import javax.inject.Inject
 
 class FilmsMapper @Inject constructor() {
 
-    fun mapIntoRecyclerData(films: List<FilmDTO>): List<RecyclerData> {
+    fun mapIntoRecyclerData(films: List<FilmDTO>, genre: String?): List<RecyclerData> {
         val recyclerDataList: MutableList<RecyclerData> =
             mutableListOf(RecyclerData.Header(HEADER_GENRES))
         recyclerDataList.addAll(getGenres(films))
         recyclerDataList.add(RecyclerData.Header(HEADER_FILMS))
-        recyclerDataList.addAll(getSortFilms(films))
+        val recyclerFilms =
+            if (genre.isNullOrEmpty()) getSortFilms(films)
+            else filterByGenres(getSortFilms(films), genre)
+        recyclerDataList.addAll(recyclerFilms)
         return recyclerDataList
     }
 
@@ -32,6 +35,19 @@ class FilmsMapper @Inject constructor() {
             recyclerFilms.add(RecyclerData.Film(sortFilm))
         }
         return recyclerFilms
+    }
+
+    private fun filterByGenres(
+        recyclerFilms: List<RecyclerData.Film>,
+        genre: String?
+    ): List<RecyclerData.Film> {
+        val filterRecyclerFilms: MutableList<RecyclerData.Film> = mutableListOf()
+        for (film in recyclerFilms) {
+            for (filmGenre in film.filmDTO.genres) {
+                if (filmGenre == genre) filterRecyclerFilms.add(film)
+            }
+        }
+        return filterRecyclerFilms
     }
 
     private companion object {

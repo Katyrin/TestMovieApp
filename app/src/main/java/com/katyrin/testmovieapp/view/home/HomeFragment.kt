@@ -15,6 +15,7 @@ import com.katyrin.testmovieapp.presenter.home.HomePresenter
 import com.katyrin.testmovieapp.presenter.home.HomeView
 import com.katyrin.testmovieapp.utils.toast
 import com.katyrin.testmovieapp.view.abs.AbsFragment
+import com.katyrin.testmovieapp.view.content.ContentScreen
 import com.katyrin.testmovieapp.view.home.adapter.ContentAdapter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -40,12 +41,15 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
         .root
 
     override fun init() {
-        binding?.recyclerView?.adapter = ContentAdapter({}, {})
+        binding?.recyclerView?.adapter = ContentAdapter(
+            { filmDTO -> presenter.navigateToScreen(ContentScreen(filmDTO)) },
+            { genre -> presenter.getFilms(genre) }
+        )
     }
 
-    override fun showRecyclerView(data: List<RecyclerData>) {
+    override fun showRecyclerView(data: List<RecyclerData>, genre: String?) {
         binding?.recyclerView?.layoutManager = getGridLayoutManager(data)
-        (binding?.recyclerView?.adapter as ContentAdapter).updateData(data)
+        (binding?.recyclerView?.adapter as ContentAdapter).updateData(data, genre)
     }
 
     private fun getGridLayoutManager(data: List<RecyclerData>): GridLayoutManager =

@@ -1,6 +1,7 @@
 package com.katyrin.testmovieapp.presenter.home
 
 import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.katyrin.testmovieapp.model.data.FilmsDTO
 import com.katyrin.testmovieapp.model.repository.FilmsRepository
 import moxy.MvpPresenter
@@ -18,15 +19,19 @@ class HomePresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
+        getFilms()
+    }
+
+    fun navigateToScreen(screen: FragmentScreen) {
+        router.navigateTo(screen)
+    }
+
+    fun getFilms(genre: String? = null) {
         viewState.showLoadingState()
-        getMovies()
+        filmsRepository.getFilms(callBackFilms(genre))
     }
 
-    private fun getMovies() {
-        filmsRepository.getFilms(callBackFilms)
-    }
-
-    private val callBackFilms = object : Callback<FilmsDTO> {
+    private fun callBackFilms(genre: String?) = object : Callback<FilmsDTO> {
         override fun onResponse(call: Call<FilmsDTO>, response: Response<FilmsDTO>) {
             val serverResponse: FilmsDTO? = response.body()
             if (response.isSuccessful && serverResponse != null) checkResponse(serverResponse)
@@ -38,11 +43,11 @@ class HomePresenter @Inject constructor(
         }
 
         private fun checkResponse(response: FilmsDTO) {
-            if (response.films.isNullOrEmpty())
-                viewState.showError(CORRUPTED_DATA)
+            if (response.films.isNullOrEmpty()) viewState.showError(CORRUPTED_DATA)
             else {
+                val recyclerData = filmsMapper.mapIntoRecyclerData(response.films, genre)
+                viewState.showRecyclerView(recyclerData, genre)
                 viewState.showNormalState()
-                viewState.showRecyclerView(filmsMapper.mapIntoRecyclerData(response.films))
             }
         }
     }

@@ -8,11 +8,20 @@
     <style name="BaseTextStyle.Header">
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="BaseTextStyle.Header.Min">
         <item name="android:textSize">@dimen/text_size_header_normal</item>
     </style>
 
-    <style name="BaseTextStyle.Header.Margin">
+    <style name="BaseTextStyle.Header.Normal">
         <item name="android:layout_margin">@dimen/margin_normal</item>
+        <item name="android:textSize">@dimen/text_size_header_normal</item>
+    </style>
+
+    <style name="BaseTextStyle.Header.Max">
+        <item name="android:layout_margin">@dimen/margin_normal</item>
+        <item name="android:textSize">@dimen/text_size_header</item>
     </style>
 
 </resources>

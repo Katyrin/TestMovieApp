@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/header_text_view"
-        style="@style/BaseTextStyle.Header.Margin"
+        style="@style/BaseTextStyle.Header.Normal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
