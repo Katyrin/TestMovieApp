@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FilmsDTO(
-    val films: List<FilmDTO> = listOf()
+    val films: List<FilmDTO>?
 ) : Parcelable

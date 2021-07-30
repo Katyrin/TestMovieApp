@@ -3,6 +3,9 @@ package com.katyrin.testmovieapp.di.modules
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.katyrin.testmovieapp.model.api.ApiService
+import com.katyrin.testmovieapp.model.networkstatus.NetworkStateRepository
+import com.katyrin.testmovieapp.model.networkstatus.NetworkStateRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -12,28 +15,35 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+interface NetworkModule {
 
-    @Provides
-    @Singleton
-    fun provideApiPost(gson: Gson, client: OkHttpClient): ApiService = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .client(client)
-        .build().create(ApiService::class.java)
+    companion object {
 
-    @Provides
-    @Singleton
-    fun provideGson(): Gson = GsonBuilder().setLenient().create()
+        @Provides
+        @Singleton
+        fun provideApiPost(gson: Gson, client: OkHttpClient): ApiService = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(client)
+            .build().create(ApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideClient(): OkHttpClient =
-        OkHttpClient.Builder().apply {
-            addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        }.build()
+        @Provides
+        @Singleton
+        fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
-    private companion object {
-        const val BASE_URL = "https://s3-eu-west-1.amazonaws.com/"
+        @Provides
+        @Singleton
+        fun provideClient(): OkHttpClient =
+            OkHttpClient.Builder().apply {
+                addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            }.build()
+
+        private const val BASE_URL = "https://s3-eu-west-1.amazonaws.com/"
     }
+
+    @Singleton
+    @Binds
+    fun bindNetworkStateRepository(
+        networkStateRepositoryImpl: NetworkStateRepositoryImpl
+    ): NetworkStateRepository
 }

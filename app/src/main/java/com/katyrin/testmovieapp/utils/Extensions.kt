@@ -16,7 +16,10 @@ fun Fragment.toast(string: String?) {
 }
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
-fun AppCompatImageView.setImageByUri(uri: String?, placeholder: Int = R.drawable.ic_no_photo_vector) {
+fun AppCompatImageView.setImageByUri(
+    uri: String?,
+    placeholder: Int = R.drawable.ic_no_photo_vector
+) {
     val glideUrl = if (uri.isNullOrEmpty()) placeholder else GlideUrl(uri)
 
     Glide.with(context)

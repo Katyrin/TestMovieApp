@@ -44,7 +44,7 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
         binding?.refreshButton?.setOnClickListener { presenter.getFilms() }
         binding?.recyclerView?.adapter = ContentAdapter(
             { filmDTO -> presenter.navigateToScreen(ContentScreen(filmDTO)) },
-            { genre -> presenter.getFilms(genre) }
+            { genre -> presenter.getFilmsByGenre(genre) }
         )
     }
 

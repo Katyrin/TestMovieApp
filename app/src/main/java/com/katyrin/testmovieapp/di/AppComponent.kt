@@ -4,10 +4,7 @@ import android.content.Context
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.katyrin.testmovieapp.App
-import com.katyrin.testmovieapp.di.modules.ContentModule
-import com.katyrin.testmovieapp.di.modules.HomeModule
-import com.katyrin.testmovieapp.di.modules.MainModule
-import com.katyrin.testmovieapp.di.modules.NetworkModule
+import com.katyrin.testmovieapp.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -21,7 +18,8 @@ import javax.inject.Singleton
         MainModule::class,
         HomeModule::class,
         NetworkModule::class,
-        ContentModule::class
+        ContentModule::class,
+        StorageModule::class
     ]
 )
 interface AppComponent : AndroidInjector<App> {
