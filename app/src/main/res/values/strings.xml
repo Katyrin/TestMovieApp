@@ -3,6 +3,5 @@
     <string name="the_list_is_empty">Список пуст</string>
     <string name="poster">Постер</string>
     <string name="very_long_text">Display a poster and title for each movie. The title of the film takes no more than 2 lines. If the title exceeds 2 lines, then add an ellipsis at the end.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="refresh">Обновить</string>
 </resources>

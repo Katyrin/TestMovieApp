@@ -41,6 +41,7 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
         .root
 
     override fun init() {
+        binding?.refreshButton?.setOnClickListener { presenter.getFilms() }
         binding?.recyclerView?.adapter = ContentAdapter(
             { filmDTO -> presenter.navigateToScreen(ContentScreen(filmDTO)) },
             { genre -> presenter.getFilms(genre) }
@@ -68,18 +69,21 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
         binding?.recyclerView?.isVisible = false
         binding?.progressBar?.isVisible = false
         binding?.emptyText?.isVisible = true
+        binding?.refreshButton?.isVisible = true
     }
 
     override fun showLoadingState() {
         binding?.recyclerView?.isVisible = false
         binding?.progressBar?.isVisible = true
         binding?.emptyText?.isVisible = false
+        binding?.refreshButton?.isVisible = false
     }
 
     override fun showNormalState() {
         binding?.recyclerView?.isVisible = true
         binding?.progressBar?.isVisible = false
         binding?.emptyText?.isVisible = false
+        binding?.refreshButton?.isVisible = false
     }
 
     override fun onDestroyView() {
