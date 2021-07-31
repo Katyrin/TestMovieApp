@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import androidx.recyclerview.widget.RecyclerView
 import com.katyrin.testmovieapp.R
 import com.katyrin.testmovieapp.databinding.FragmentHomeBinding
 import com.katyrin.testmovieapp.model.data.RecyclerData
@@ -41,11 +42,12 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
         .root
 
     override fun init() {
+        binding?.swipeRefreshLayout?.setOnRefreshListener { presenter.getFilms() }
         binding?.refreshButton?.setOnClickListener { presenter.getFilms() }
         binding?.recyclerView?.adapter = ContentAdapter(
             { filmDTO -> presenter.navigateToScreen(ContentScreen(filmDTO)) },
             { genre -> presenter.getFilmsByGenre(genre) }
-        )
+        ).apply { stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW }
     }
 
     override fun showRecyclerView(data: List<RecyclerData>, genre: String?) {
@@ -67,21 +69,20 @@ class HomeFragment : AbsFragment(R.layout.fragment_home), HomeView {
 
     override fun showEmptyList() {
         binding?.recyclerView?.isVisible = false
-        binding?.progressBar?.isVisible = false
+        binding?.swipeRefreshLayout?.isRefreshing = false
         binding?.emptyText?.isVisible = true
         binding?.refreshButton?.isVisible = true
     }
 
     override fun showLoadingState() {
         binding?.recyclerView?.isVisible = false
-        binding?.progressBar?.isVisible = true
         binding?.emptyText?.isVisible = false
         binding?.refreshButton?.isVisible = false
     }
 
     override fun showNormalState() {
         binding?.recyclerView?.isVisible = true
-        binding?.progressBar?.isVisible = false
+        binding?.swipeRefreshLayout?.isRefreshing = false
         binding?.emptyText?.isVisible = false
         binding?.refreshButton?.isVisible = false
     }

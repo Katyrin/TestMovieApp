@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.katyrin.testmovieapp.model.data.RecyclerData
 import com.katyrin.testmovieapp.model.interactor.MainInteractor
+import com.katyrin.testmovieapp.utils.CodeThrottle
 import kotlinx.coroutines.*
 import moxy.MvpPresenter
 import javax.inject.Inject
@@ -13,6 +14,7 @@ class HomePresenter @Inject constructor(
     private val mainInteractor: MainInteractor
 ) : MvpPresenter<HomeView>() {
 
+    private var codeThrottle: CodeThrottle? = CodeThrottle()
     private val presenterCoroutineScope = CoroutineScope(
         Dispatchers.Main
                 + SupervisorJob()
@@ -32,7 +34,7 @@ class HomePresenter @Inject constructor(
     }
 
     fun navigateToScreen(screen: FragmentScreen) {
-        router.navigateTo(screen)
+        codeThrottle?.throttle { router.navigateTo(screen) }
     }
 
     fun getFilmsByGenre(genre: String? = null) {
@@ -56,6 +58,7 @@ class HomePresenter @Inject constructor(
 
     override fun onDestroy() {
         cancelJob()
+        codeThrottle = null
         super.onDestroy()
     }
 
