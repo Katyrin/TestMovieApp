@@ -10,6 +10,6 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface HomeView : MainView, ErrorView, LoadingView, MvpView {
-    fun showRecyclerView(data: List<RecyclerData>, genre: String?)
+    fun showRecyclerView(data: List<RecyclerData>, genre: String? = null)
     fun showEmptyList()
 }
