@@ -50,8 +50,8 @@ class HomePresenter @Inject constructor(
         viewState.showLoadingState()
         cancelJob()
         presenterCoroutineScope.launch {
-            val recyclerData: List<RecyclerData> = mainInteractor.getFilms()
-            viewState.showRecyclerView(recyclerData)
+            val dataPair: Pair<List<RecyclerData>, String?> = mainInteractor.getFilms()
+            viewState.showRecyclerView(dataPair.first, dataPair.second)
             viewState.showNormalState()
         }
     }

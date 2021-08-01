@@ -16,15 +16,19 @@ class MainInteractorImpl @Inject constructor(
 ) : MainInteractor {
 
     private var baseRecyclerData: MutableList<RecyclerData> = mutableListOf()
+    private var cashGenre: String? = null
 
-    override suspend fun getFilms(): List<RecyclerData> =
+    override suspend fun getFilms(): Pair<List<RecyclerData>, String?> =
         withContext(Dispatchers.IO) {
-            val films: List<FilmDTO> =
-                if (networkStateRepository.isOnline()) filmsRepository.getRemoteFilms() ?: listOf()
-                else filmsRepository.getLocalFilms()
+            val films: List<FilmDTO> = getFilmsDto()
             filmsRepository.putFilms(films)
-            getRecyclerDataList(films)
+            if (cashGenre.isNullOrEmpty()) getRecyclerDataList(films) to cashGenre
+            else getFilmsByGenre(cashGenre) to cashGenre
         }
+
+    private suspend fun getFilmsDto(): List<FilmDTO> =
+        if (networkStateRepository.isOnline()) filmsRepository.getRemoteFilms() ?: listOf()
+        else filmsRepository.getLocalFilms()
 
     private suspend fun getRecyclerDataList(films: List<FilmDTO>): List<RecyclerData> {
         baseRecyclerData = mappingBaseData(films).toMutableList()
@@ -45,6 +49,7 @@ class MainInteractorImpl @Inject constructor(
 
     override suspend fun getFilmsByGenre(genre: String?): List<RecyclerData> =
         withContext(Dispatchers.IO) {
+            cashGenre = genre
             val films: List<FilmDTO> = filmsRepository.getFilmsByGenre(genre)
             getRecyclerDataListByGenre(films)
         }
